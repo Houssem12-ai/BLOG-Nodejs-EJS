@@ -5,7 +5,7 @@ const Article = require("../models/article");
 // i can't believe !!!!
 //order matters ?????????????????
 router.get("/new", (req, res) => {
-  res.render("./articles/new");
+  res.render("./articles/new", { article: new Article() });
 });
 
 /* router.get("/new", (req, res) => {
