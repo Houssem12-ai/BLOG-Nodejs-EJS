@@ -17,12 +17,16 @@ router.get("/new", (req, res) => {
   res.render("./articles/new", { article: article });
 }); */
 
-router.get("/:id", (req, res) => {
-  //res.send("salam");
+router.get("/:id", async (req, res) => {
+  const article = await Article.findById(req.params.id);
+  if (article == null) {
+    res.redirect("/");
+  }
+  res.render("articles/show", { article: article });
 });
 
 router.post("/", async (req, res) => {
-  const article = new Article({
+  let article = new Article({
     //not making it constant
     // let cause a problem
     title: req.body.title,
@@ -30,8 +34,8 @@ router.post("/", async (req, res) => {
     markdown: req.body.markdown,
   });
   try {
-    let article = await article.save(); //assign a variable to it
-    res.redirect(`/article/${article.id}`, { article: article });
+    article = await article.save(); //assign a variable to it
+    res.redirect(`/articles/${article.id}`);
   } catch (e) {
     console.log(e);
     res.render("articles/new", { article: article });
