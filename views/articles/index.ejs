@@ -16,6 +16,7 @@
 
     <title>Blog</title>
   </head>
+
   <body>
     <div class="container">
       <h1 class="mb-4">Blogs</h1>
@@ -45,7 +46,12 @@
           </form>
         </div>
       </div>
-      <% }); %>
+      <% }); %> <%if(user) { %>
+      <a href="/logout" class="btn btn-primary">LogOut</a>
+      <% } else { %>
+      <a href="/signup" class="btn btn-primary">Signup</a>
+      <a href="/login" class="btn btn-primary">Login</a>
+      <% } %>
     </div>
   </body>
 </html>

@@ -5,8 +5,6 @@
     font-weight: bold;
   }
 </style>
-
-<h1>login</h1>
 <form action="/login">
   <h2>Login</h2>
   <label for="email">Email</label>
@@ -39,9 +37,9 @@
 
       if (data.user) {
         console.log(data.user);
-        //location.assign("/");
+        location.assign("/");
       } else {
-        console.log(data);
+        console.log(data.errors);
       }
     } catch (e) {
       console.log(e);

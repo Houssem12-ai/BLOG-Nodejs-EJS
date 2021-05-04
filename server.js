@@ -8,6 +8,7 @@ const Article = require("./models/article");
 const routerArticle = require("./routes/articles");
 const routerAuthentication = require("./routes/authen");
 
+const { requireAuth, checkUser } = require("./middleware/authMidd");
 const methodOverride = require("method-override");
 
 app.set("view engine", "ejs");
@@ -32,7 +33,7 @@ mongoose
   )
   .catch((err) => console.log(err));
 
-app.get("/", async (req, res) => {
+app.get("/", checkUser, async (req, res) => {
   const articles = await Article.find().sort({ createAt: "desc" });
   //res.send(articles);
   res.render("articles/index", { articles: articles }); //it looks by default in views by put ./
@@ -60,5 +61,6 @@ app.get("/read-cookies", (req, res) => {
   //res.send("helakfe"); */
 });
 //always put it at the end to all configuration are set before
-app.use("/articles", routerArticle);
+app.use("*", checkUser);
+app.use("/articles", requireAuth, routerArticle);
 app.use("/", routerAuthentication);

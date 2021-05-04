@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const Article = require("../models/article");
+const { requireAuth } = require("../middleware/authMidd");
 
 router.get("/edit/:id", async (req, res) => {
   const article = await Article.findById(req.params.id);
