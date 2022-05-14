@@ -1,9 +1,10 @@
 const mongoose = require("mongoose");
 const slugify = require("slugify");
-const marked = require("marked");
+const { marked } = require('marked');
 const createDomPurify = require("dompurify");
 const { JSDOM } = require("jsdom");
 const dompurify = createDomPurify(new JSDOM().window);
+
 const articleSchema = new mongoose.Schema({
   title: {
     type: String,
